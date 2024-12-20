@@ -137,11 +137,10 @@ _build-bib $target_image $tag $type $config: (_rootful_load_image target_image t
     mkdir -p "output"
 
     echo "Cleaning up previous build"
-
     if [[ $type == iso ]]; then
-        sudo rm -rf "output/bootiso" || true
+      sudo rm -rf "output/bootiso" || true
     else
-        sudo rm -rf "output/${type}" || true
+      sudo rm -rf "output/${type}" || true
     fi
 
     args="--type ${type}"
@@ -155,6 +154,7 @@ _build-bib $target_image $tag $type $config: (_rootful_load_image target_image t
       -it \
       --privileged \
       --pull=newer \
+      --net=host \
       --security-opt label=type:unconfined_t \
       -v $(pwd)/${config} \
       -v $(pwd)/output:/output \
