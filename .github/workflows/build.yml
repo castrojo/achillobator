@@ -6,6 +6,7 @@ on:
       - main
   schedule:
     - cron: '05 10 * * *'  # 10:05am UTC everyday
+  merge_group:  
   push:
     branches:
       - main
