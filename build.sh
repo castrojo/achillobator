@@ -59,7 +59,7 @@ dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/ublue-os/s
 dnf install -y \
     gnome-shell-extension-logo-menu
 # dnf --enablerepo epel-testing install gnome-shell-extension-blur-my-shell # Will work on 19/12 (maybe later)
-# dnf --enablerepo epel-testing install gnome-tweaks # Will also work later
+# dnf --enablerepo epel-testing install gnome-tweaks fastfetch # Will also work later
 # FIXME: remove these when they drop on EPEL
 dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-shell-extension-blur-my-shell/67/1.el10_0/noarch/gnome-shell-extension-blur-my-shell-67-1.el10_0.noarch.rpm
 dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-tweaks/46.1/1.el10_0/noarch/gnome-tweaks-46.1-1.el10_0.noarch.rpm
