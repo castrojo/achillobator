@@ -32,6 +32,7 @@ To build locally and then spit out a VM:
 
 ```
 just build-vm 1
+just build-iso ghcr.io/centos-workstation/achillobator
 ```
 
 qcow2 file is written to the `output/` directory. Username and password are `centos`/`centos`
