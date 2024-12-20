@@ -4,6 +4,7 @@ set -ouex pipefail
 
 # Image Info
 OLD_PRETTY_NAME=$(bash -c 'source /usr/lib/os-release ; echo $NAME $VERSION')
+MAJOR_VERSION=$(bash -c 'source /usr/lib/os-release ; echo $VERSION_ID')
 IMAGE_PRETTY_NAME="Achillobator"
 IMAGE_LIKE="rhel fedora"
 HOME_URL="https://projectbluefin.io"
