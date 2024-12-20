@@ -48,24 +48,36 @@ fi
 # Fix issues caused by ID no longer being rhel??? (FIXME: check if this is necessary)
 sed -i "s/^EFIDIR=.*/EFIDIR=\"rhel\"/" /usr/sbin/grub2-switch-to-blscfg
 
-dnf install -y \
+dnf -y install \
     distrobox \
     gnome-extensions-app \
     gnome-shell-extension-appindicator \
     gnome-shell-extension-dash-to-dock \
-    glow
+    gnome-tweaks
 
-# Test ublue coprs
-dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/ublue-os/staging/repo/centos-stream-10/ublue-os-staging-centos-stream-10.repo
-dnf install -y \
-    gnome-shell-extension-logo-menu
-# dnf --enablerepo epel-testing install gnome-shell-extension-blur-my-shell # Will work on 19/12 (maybe later)
-# dnf --enablerepo epel-testing install gnome-tweaks fastfetch # Will also work later
-# FIXME: remove these when they drop on EPEL
-dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-shell-extension-blur-my-shell/67/1.el10_0/noarch/gnome-shell-extension-blur-my-shell-67-1.el10_0.noarch.rpm
-dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-tweaks/46.1/1.el10_0/noarch/gnome-tweaks-46.1-1.el10_0.noarch.rpm
-dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/che/nerd-fonts/repo/centos-stream-10/che-nerd-fonts-centos-stream-10.repo
-dnf -y install nerd-fonts
+dnf -y --enablerepo epel-testing install \
+  gnome-shell-extension-blur-my-shell # fastfetch soon
+
+dnf config-manager --add-repo https://pkgs.tailscale.com/stable/centos/9/tailscale.repo
+dnf config-manager --set-disabled tailscale-stable
+dnf -y --enablerepo tailscale-stable install \
+  tailscale
+
+dnf config-manager --add-repo "https://repo.charm.sh/yum/"
+dnf config-manager --set-disabled repo.charm.sh_yum_
+echo -e "gpgcheck=1\ngpgkey=https://repo.charm.sh/yum/gpg.key" | tee -a "/etc/yum.repos.d/repo.charm.sh_yum_.repo"
+dnf -y --enablerepo repo.charm.sh_yum_  install \
+  glow
+
+dnf config-manager --add-repo "https://copr.fedorainfracloud.org/coprs/ublue-os/staging/repo/centos-stream-${MAJOR_VERSION}/ublue-os-staging-centos-stream-${MAJOR_VERSION}.repo"
+dnf config-manager --set-disabled copr:copr.fedorainfracloud.org:ublue-os:staging
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:ublue-os:staging install \
+  gnome-shell-extension-logo-menu
+
+dnf config-manager --add-repo "https://copr.fedorainfracloud.org/coprs/che/nerd-fonts/repo/centos-stream-${MAJOR_VERSION}/che-nerd-fonts-centos-stream-${MAJOR_VERSION}.repo"
+dnf config-manager --set-disabled copr:copr.fedorainfracloud.org:che:nerd-fonts
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:che:nerd-fonts install \
+  nerd-fonts
 
 # Convince the installer we are in CI
 touch /.dockerenv
@@ -87,3 +99,4 @@ systemctl enable dconf-update.service
 # Forcefully enable brew setup since the preset doesnt seem to work?
 systemctl enable brew-setup.service
 systemctl disable mcelog.service
+systemctl enable tailscaled.service
