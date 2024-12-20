@@ -64,6 +64,9 @@ dnf install -y \
 dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-shell-extension-blur-my-shell/67/1.el10_0/noarch/gnome-shell-extension-blur-my-shell-67-1.el10_0.noarch.rpm
 dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-tweaks/46.1/1.el10_0/noarch/gnome-tweaks-46.1-1.el10_0.noarch.rpm
 # dnf -y install just # whenever this exists in EPEL maybe?
+dnf copr enable -y che/nerd-fonts
+dnf -y install nerd-fonts
+dnf copr disable -y che/nerd-fonts 
 
 # Convince the installer we are in CI
 touch /.dockerenv
