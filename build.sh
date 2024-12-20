@@ -63,10 +63,8 @@ dnf install -y \
 # FIXME: remove these when they drop on EPEL
 dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-shell-extension-blur-my-shell/67/1.el10_0/noarch/gnome-shell-extension-blur-my-shell-67-1.el10_0.noarch.rpm
 dnf -y install https://kojipkgs.fedoraproject.org/packages/gnome-tweaks/46.1/1.el10_0/noarch/gnome-tweaks-46.1-1.el10_0.noarch.rpm
-# dnf -y install just # whenever this exists in EPEL maybe?
-dnf copr enable -y che/nerd-fonts
+dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/che/nerd-fonts/repo/centos-stream-10/che-nerd-fonts-centos-stream-10.repo
 dnf -y install nerd-fonts
-dnf copr disable -y che/nerd-fonts 
 
 # Convince the installer we are in CI
 touch /.dockerenv
