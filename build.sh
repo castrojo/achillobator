@@ -48,12 +48,19 @@ fi
 # Fix issues caused by ID no longer being rhel??? (FIXME: check if this is necessary)
 sed -i "s/^EFIDIR=.*/EFIDIR=\"rhel\"/" /usr/sbin/grub2-switch-to-blscfg
 
+# Additions
 dnf -y install \
     distrobox \
     gnome-extensions-app \
     gnome-shell-extension-appindicator \
     gnome-shell-extension-dash-to-dock \
     gnome-tweaks
+
+# Removals
+dnf -y remove \
+    subscription-manager
+
+# Repos 
 
 dnf -y --enablerepo epel-testing install \
   gnome-shell-extension-blur-my-shell # fastfetch soon
