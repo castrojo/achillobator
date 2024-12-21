@@ -1,17 +1,17 @@
 [customizations.installer.kickstart]
 contents = """
+# NOOP - do not remove this else the installer will automatically partition the disk
 """
 
 [customizations.installer.modules]
 enable = [
-  "org.fedoraproject.Anaconda.Modules.Localization",
+  "org.fedoraproject.Anaconda.Modules.Storage"
+]
+disable = [
   "org.fedoraproject.Anaconda.Modules.Network",
-  "org.fedoraproject.Anaconda.Modules.Payloads",
-  "org.fedoraproject.Anaconda.Modules.Runtime",
   "org.fedoraproject.Anaconda.Modules.Security",
   "org.fedoraproject.Anaconda.Modules.Services",
-  "org.fedoraproject.Anaconda.Modules.Storage",
+  "org.fedoraproject.Anaconda.Modules.Users",
   "org.fedoraproject.Anaconda.Modules.Subscription",
-  "org.fedoraproject.Anaconda.Modules.Timezone",
-  "org.fedoraproject.Anaconda.Modules.Users"
+  "org.fedoraproject.Anaconda.Modules.Timezone" 
 ]
