@@ -1,20 +1,5 @@
 [customizations.installer.kickstart]
 contents = """
-graphical --non-interactive
-lang en_US.UTF-8
-zerombr
-clearpart --all --initlabel --disklabel=gpt
-autopart --noswap --type xfs
-network --bootproto=dhcp --device=link --activate --onboot=on
-timezone --utc America/New_York
-firstboot --enable
-reboot
-
-%post --nochroot
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.github.tchx84.Flatseal -y
-flatpak install flathub org.keepassxc.KeePassXC -y
-%end
 """
 
 [customizations.installer.modules]
