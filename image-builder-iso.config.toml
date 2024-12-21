@@ -1,6 +1,5 @@
-[customizations.installer.kickstart]
-contents = """
-"""
+[customizations.installer]
+unattended = false 
 
 [customizations.installer.modules]
 enable = [
@@ -13,5 +12,14 @@ enable = [
   "org.fedoraproject.Anaconda.Modules.Storage",
   "org.fedoraproject.Anaconda.Modules.Subscription",
   "org.fedoraproject.Anaconda.Modules.Timezone",
-  "org.fedoraproject.Anaconda.Modules.Users"
+  "org.fedoraproject.Anaconda.Modules.Users" 
 ]
+
+[org.fedoraproject.Anaconda.Modules.Storage]
+automatic = false
+
+[customizations.installer.kickstart]
+contents = """
+firstboot --enable
+reboot
+"""
